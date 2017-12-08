@@ -916,7 +916,7 @@ void CMenu::Tabs()
 			x = x + 270;
 			line_y = 15;
 
-			DrawBox(x, y, 250, 200);//Presets
+			DrawBox(x, y, 250, 160);//Presets
 
 			g_pISurface->DrawSetColor(1, 8, 8, 255);
 			g_pISurface->DrawFilledRect(x + 14, y - 1, x + 64, y + 2);
@@ -948,10 +948,10 @@ void CMenu::Tabs()
 		}
 
 		{//BOX3
-			y = y + 220;
+			y = y + 180;
 			line_y = 15;
 
-			DrawBox(x, y, 250, 210);//Other
+			DrawBox(x, y, 250, 250);//Other
 
 			g_pISurface->DrawSetColor(1, 8, 8, 255);
 			g_pISurface->DrawFilledRect(x + 14, y - 1, x + 54, y + 2);
@@ -961,6 +961,9 @@ void CMenu::Tabs()
 			line_y += 20;
 
 			Checkbox(x + box_indent_x, y + line_y, cvar.hide_from_obs, "Hide from OBS");
+			line_y += 20;
+
+			Checkbox(x + box_indent_x, y + line_y, cvar.bypass_valid_blockers, "Bypass valid blockers");
 			line_y += 20;
 
 			Checkbox(x + box_indent_x, y + line_y, cvar.bypass_trace_blockers, "Bypass trace blockers");

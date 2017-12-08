@@ -77,6 +77,7 @@ void CCvars::Init()
 
 	esp_fake = false;
 	bypass_trace_blockers = true;
+	bypass_valid_blockers = false;
 	esp_sound_minimum_volume = 0;
 
 	esp_weapon = 1;
@@ -350,6 +351,7 @@ void CFunctions::SaveCvars()
 
 	g_Utils.cIniWrite(g_pGlobals.IniPath, Section, "esp_fake", dtoa(s, cvar.esp_fake));
 	g_Utils.cIniWrite(g_pGlobals.IniPath, Section, "bypass_trace_blockers", dtoa(s, cvar.bypass_trace_blockers));
+	g_Utils.cIniWrite(g_pGlobals.IniPath, Section, "bypass_valid_blockers", dtoa(s, cvar.bypass_valid_blockers));
 	g_Utils.cIniWrite(g_pGlobals.IniPath, Section, "esp_sound_minimum_volume", dtoa(s, cvar.esp_sound_minimum_volume));
 
 	g_Utils.cIniWrite(g_pGlobals.IniPath, Section, "esp_weapon", dtoa(s, cvar.esp_weapon));
@@ -581,6 +583,7 @@ void CFunctions::LoadCvars()
 
 	cvar.esp_fake = atoi(g_Utils.cIniRead(g_pGlobals.IniPath, Section, "esp_fake", "0"));
 	cvar.bypass_trace_blockers = atoi(g_Utils.cIniRead(g_pGlobals.IniPath, Section, "bypass_trace_blockers", "0"));
+	cvar.bypass_valid_blockers = atoi(g_Utils.cIniRead(g_pGlobals.IniPath, Section, "bypass_valid_blockers", "0"));
 	cvar.esp_sound_minimum_volume = atof(g_Utils.cIniRead(g_pGlobals.IniPath, Section, "esp_sound_minimum_volume", "0"));
 
 	cvar.esp_weapon = atof(g_Utils.cIniRead(g_pGlobals.IniPath, Section, "esp_weapon", "0"));

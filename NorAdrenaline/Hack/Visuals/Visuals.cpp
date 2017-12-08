@@ -188,7 +188,7 @@ void CVisuals::Run()
 
 	for (int i = 1; i <= g_Engine.GetMaxClients(); i++)
 	{
-		if (i == g_Local.iIndex) 
+		if (i == g_Local.iIndex)
 			continue;
 
 		if (!g_Player[i].bAlive)

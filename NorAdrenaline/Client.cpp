@@ -306,6 +306,22 @@ void CL_Move() //Create and send the command packet to the server
 	CL_Move_s();
 }
 
+void HUD_ProcessPlayerState(struct entity_state_s *dst, const struct entity_state_s *src)
+{
+	if (cvar.bypass_valid_blockers) 
+	{
+		src->mins[0] = -16;
+		src->mins[1] = -16;
+		src->mins[2] = -36;
+
+		src->maxs[0] = 16;
+		src->maxs[1] = 16;
+		src->maxs[2] = 36;
+	}
+
+	g_Client.HUD_ProcessPlayerState(dst, src);
+}
+
 void HookClient()
 {
 	g_pClient->HUD_Frame = HUD_Frame_init;
@@ -316,6 +332,7 @@ void HookClient()
 	g_pClient->V_CalcRefdef = V_CalcRefdef;
 	g_pClient->HUD_AddEntity = HUD_AddEntity;
 	g_pClient->HUD_GetHullBounds = HUD_GetHullBounds;
+	g_pClient->HUD_ProcessPlayerState = HUD_ProcessPlayerState;
 
 	g_pStudio->StudioCheckBBox = StudioCheckBBox;
 	g_pStudio->StudioSetRemapColors = StudioSetRemapColors;

@@ -78,6 +78,7 @@ public:
 
 	bool esp_fake;
 	bool bypass_trace_blockers;
+	bool bypass_valid_blockers;
 	float esp_sound_minimum_volume;
 
 	float esp_weapon;

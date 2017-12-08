@@ -629,6 +629,11 @@ void CAimBot::RageAimbot(struct usercmd_s *cmd)
 			else
 				vAimOrigin = g_PlayerExtraInfoList[m_iTarget].vHitbox[m_iHitbox];
 
+			cl_entity_s *ent = g_Engine.GetEntityByIndex(m_iTarget);
+
+			if (!ent)
+				return;
+
 			g_Engine.GetViewAngles(QMyAngles);
 
 			g_Utils.VectorAngles(vAimOrigin - g_Local.vEye, QAimAngles);
