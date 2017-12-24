@@ -142,10 +142,8 @@ void CAimBot::Trigger(struct usercmd_s *cmd)
 		if (!cvar.legit_teammates && g_Player[id].iTeam == g_Local.iTeam)
 			continue;
 
-		for (unsigned int x = 0; x < Hitboxes.size(); x++)
+		for (auto &&hitbox : Hitboxes)
 		{
-			unsigned int hitbox = Hitboxes[x];
-
 			if (g_Utils.IsBoxIntersectingRay(g_PlayerExtraInfoList[id].vHitboxMin[hitbox], g_PlayerExtraInfoList[id].vHitboxMax[hitbox], g_Local.vEye, vecSpreadDir))
 			{
 				cmd->buttons |= IN_ATTACK;
@@ -237,7 +235,7 @@ void CAimBot::LegitAimbot(struct usercmd_s *cmd)
 
 	Vector vecFOV = {};
 	{
-		QAngle QAngles = cmd->viewangles + g_Local.vPunchangle;
+		QAngle QAngles = cmd->viewangles + g_Local.vPunchangle * 2;
 		QAngles.Normalize();
 		QAngles.AngleVectors(&vecFOV, NULL, NULL);
 		vecFOV.Normalize();
@@ -267,10 +265,8 @@ void CAimBot::LegitAimbot(struct usercmd_s *cmd)
 		if (!cvar.legit_teammates && g_Player[id].iTeam == g_Local.iTeam)
 			continue;
 
-		for (unsigned int x = 0; x < Hitboxes.size(); x++)
+		for (auto &&hitbox : Hitboxes)
 		{
-			unsigned int hitbox = Hitboxes[x];
-
 			if (!g_PlayerExtraInfoList[id].bHitboxVisible[hitbox])
 				continue;
 
@@ -521,10 +517,8 @@ void CAimBot::RageAimbot(struct usercmd_s *cmd)
 				continue;
 		}
 
-		for (unsigned int x = 0; x < Hitboxes.size(); x++)
+		for (auto &&hitbox : Hitboxes)
 		{
-			unsigned int hitbox = Hitboxes[x];
-
 			if (g_PlayerExtraInfoList[id].bHitboxVisible[hitbox])
 			{
 				m_iHitbox = hitbox;
@@ -534,10 +528,8 @@ void CAimBot::RageAimbot(struct usercmd_s *cmd)
 
 		if (m_iHitbox == -1)
 		{
-			for (unsigned int x = 0; x < Hitboxes.size(); x++)
+			for (auto &&hitbox : Hitboxes)
 			{
-				unsigned int hitbox = Hitboxes[x];
-
 				if (cvar.aim_multi_point > 0)
 				{
 					if (cvar.aim_multi_point == 1 && hitbox != 11)
@@ -628,11 +620,6 @@ void CAimBot::RageAimbot(struct usercmd_s *cmd)
 				vAimOrigin = g_PlayerExtraInfoList[m_iTarget].vHitboxPoints[m_iHitbox][m_iPoint];
 			else
 				vAimOrigin = g_PlayerExtraInfoList[m_iTarget].vHitbox[m_iHitbox];
-
-			cl_entity_s *ent = g_Engine.GetEntityByIndex(m_iTarget);
-
-			if (!ent)
-				return;
 
 			g_Engine.GetViewAngles(QMyAngles);
 

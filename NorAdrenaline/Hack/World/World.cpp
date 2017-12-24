@@ -444,10 +444,8 @@ void CWorld::UpdateVisibility(int id)
 	pmtrace_t tr;
 	int detect = 0;
 
-	for (unsigned int x = 0; x < Hitboxes.size(); x++)
+	for (auto &&hitbox : Hitboxes)
 	{
-		unsigned int hitbox = Hitboxes[x];
-
 		g_Engine.pEventAPI->EV_SetTraceHull(2);
 
 		if (cvar.bypass_trace_blockers)
