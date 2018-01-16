@@ -302,7 +302,8 @@ void CWorld::UpdatePlayers()
 				{
 					szWeapon = &szWeapon[3];
 					g_Utils.StringReplace(szWeapon, ".mdl", "");
-					g_PlayerExtraInfoList[ent->index].szWeaponName = szWeapon;
+					g_PlayerExtraInfoList[ent->index].szWeaponName = new char[strlen(mdl->name) + 1];
+					strcpy(g_PlayerExtraInfoList[ent->index].szWeaponName, szWeapon);
 				}
 			}
 		}
