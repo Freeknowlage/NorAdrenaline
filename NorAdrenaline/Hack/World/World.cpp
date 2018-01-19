@@ -568,7 +568,6 @@ void CWorld::Reset()
 	ClearLocalPlayer();
 	ClearPlayers();
 	ClearEntities();
-	bOtherResolver = false;
 }
 
 void CWorld::Update(float frametime, struct usercmd_s *cmd)

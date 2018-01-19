@@ -272,7 +272,7 @@ void CMenu::Tabs()
 			save[4] = y + line_y;
 			line_y += 30;
 
-			char *tmp3[] = { "Dynamic", "Maximum", "Flucture" };
+			char *tmp3[] = { "Dynamic", "Maximum", "Flucture", "Break lag compensation" };
 			save[3] = y + line_y;
 			line_y += 40;
 
@@ -286,7 +286,7 @@ void CMenu::Tabs()
 			line_y += 20;
 
 			ListBox(iListIndex++, x + indent_x, save[3], "", cvar.fakelag_move, tmp4, 4, false);
-			ListBox(iListIndex++, x + indent_x, save[4], "", cvar.fakelag_type, tmp3, 3, false);
+			ListBox(iListIndex++, x + indent_x, save[4], "", cvar.fakelag_type, tmp3, 4, false);
 		}
 
 		{//BOX2

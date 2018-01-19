@@ -86,6 +86,35 @@ void CMisc::FakeLag(struct usercmd_s *cmd)
 
 				jitter = !jitter;
 			}
+			else if (cvar.fakelag_type == 4)//Break lag compensation
+			{
+				Vector velocity = pmove->velocity;
+				velocity.z = 0;
+
+				float len = velocity.Length() * g_Local.flFrametime;
+
+				if (len < 64.0f && velocity.Length() > 0.05f)
+				{
+					int need_choke = 64.0f / len;
+
+					if (need_choke > cvar.fakelag_limit)
+						need_choke = cvar.fakelag_limit;
+
+					//g_Engine.Con_NPrintf(1, "need_choke: %i", need_choke);
+
+					if (choked < need_choke)
+					{
+						g_Utils.bSendpacket(false);
+
+						choked++;
+					}
+					else {
+						choked = 0;
+					}
+
+					//g_Engine.Con_NPrintf(2, "choked: %i", choked);
+				}
+			}
 		}
 	}
 }
